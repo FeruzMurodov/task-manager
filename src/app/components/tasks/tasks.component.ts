@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Task} from 'src/app/models/task.model';
 
 @Component({
@@ -6,14 +6,24 @@ import {Task} from 'src/app/models/task.model';
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css']
 })
-export class TasksComponent {
-  tasks: Task[] = [
-    {id: 1, title: 'Learn Angular', completed: false},
-    {id: 2, title: 'Create task manager', completed: true},
-    {id: 3, title: 'Connect firebase', completed: false},
-  ];
-
+export class TasksComponent implements OnInit {
+  tasks: Task[] = [];
   newTaskTitle: string = ''
+
+  ngOnInit() {
+    this.loadTasks();
+  }
+
+  loadTasks() {
+    const savedTasks = localStorage.getItem('tasks');
+    if (savedTasks) {
+      this.tasks = JSON.parse(savedTasks);
+    }
+  }
+
+  saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
+  }
 
   addTask() {
     if (!this.newTaskTitle.trim()) return;
@@ -26,9 +36,18 @@ export class TasksComponent {
 
     this.tasks.push(newTask);
     this.newTaskTitle = '';
+    this.saveTasks();
   }
 
   deleteTask(taskId: number) {
     this.tasks = this.tasks.filter(task => task.id !== taskId);
+    this.saveTasks();
+  }
+
+  toggleTask(taskId: number) {
+    this.tasks = this.tasks.map(task =>
+      task.id === taskId ? {...task, completed: !task.completed} : task
+    );
+    this.saveTasks();
   }
 }

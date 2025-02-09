@@ -1,0 +1,10 @@
+{
+  "TASK_MANAGER": "Task Manager",
+  "NEW_TASK_PLACEHOLDER": "New Task",
+  "ADD_TASK": "Add Task",
+  "ALL": "All",
+  "ACTIVE": "Active",
+  "COMPLETED": "Completed",
+  "DELETE_COMPLETED": "Delete Completed Tasks",
+  "REMAINING_TASKS": "Remaining {{count}} tasks to do"
+}

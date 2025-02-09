@@ -1,6 +1,7 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {Task} from 'src/app/models/task.model';
 import {trigger, transition, style, animate, state} from "@angular/animations";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-tasks',
@@ -25,6 +26,14 @@ export class TasksComponent implements OnInit {
   tasks: Task[] = [];
   newTaskTitle: string = ''
   filter: string = 'all'
+
+  constructor(private translate: TranslateService) {
+    this.translate.setDefaultLang('en');
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang) {
+      this.translate.use(savedLang);
+    }
+  }
 
   ngOnInit() {
     this.loadTasks();
@@ -123,6 +132,11 @@ export class TasksComponent implements OnInit {
     if (event.ctrlKey && event.key === 'Enter') {
       this.addTask();
     }
+  }
+
+  setLanguage(lang: string) {
+    this.translate.use(lang);
+    localStorage.setItem('lang', lang);
   }
 
 }

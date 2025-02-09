@@ -48,6 +48,21 @@ button:hover {
   color: gray;
 }
 
+.main-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.main-title h1 {
+  display: flex;
+}
+
+.main-title div {
+  display: flex;
+}
+
 .active-filter {
   background-color: #007bff;
   color: white;
@@ -119,4 +134,23 @@ button:hover {
     font-size: 10px;
     margin-top: 5px;
   }
+}
+
+.language-switcher {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.language-switcher button {
+  margin-left: 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.language-switcher button:hover {
+  background-color: #6c5050;
 }

@@ -1,11 +1,22 @@
-<input #taskInput type="text" [(ngModel)]="newTaskTitle" placeholder="New Task">
-<button (click)="addTask()">Add task</button>
-<div>
-  <button (click)="setFilter('all')" [ngClass]="{'active-filter': filter === 'all'}">All</button>
-  <button (click)="setFilter('active')" [ngClass]="{'active-filter': filter === 'active'}">Active</button>
-  <button (click)="setFilter('completed')" [ngClass]="{'active-filter': filter === 'completed'}">Completed</button>
+<div class="main title">
+  <h1>{{ 'TASK_MANAGER' | translate }}</h1>
+  <div class="language-switcher">
+    <button (click)="setLanguage('en')">EN</button>
+    <button (click)="setLanguage('ru')">RU</button>
+    <button (click)="setLanguage('uz')">UZ</button>
+  </div>
 </div>
-<p>Remaining {{ remainingTasksCount() }} tasks to do</p>
+<input #taskInput type="text" [(ngModel)]="newTaskTitle" [placeholder]="'NEW_TASK_PLACEHOLDER' | translate">
+<button (click)="addTask()">{{ 'ADD_TASK' | translate }}</button>
+<div>
+  <button (click)="setFilter('all')" [ngClass]="{'active-filter': filter === 'all'}">{{ 'ALL' | translate }}</button>
+  <button (click)="setFilter('active')" [ngClass]="{'active-filter': filter === 'active'}">{{ 'ACTIVE' | translate }}
+  </button>
+  <button (click)="setFilter('completed')"
+          [ngClass]="{'active-filter': filter === 'completed'}">{{ 'COMPLETED' | translate }}
+  </button>
+</div>
+<p>{{ 'REMAINING_TASKS' | translate:{count: remainingTasksCount()} }}</p>
 <ul>
   <li
     *ngFor="let task of filteredTasks"
@@ -27,6 +38,6 @@
     <button (click)="deleteTask(task.id)">❌</button>
   </li>
   <button (click)="clearCompletedTasks()">
-    Delete completed tasks
+    {{ 'DELETE_COMPLETED' | translate }}
   </button>
 </ul>

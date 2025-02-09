@@ -1,0 +1,10 @@
+{
+  "TASK_MANAGER": "Менеджер задач",
+  "NEW_TASK_PLACEHOLDER": "Новая задача",
+  "ADD_TASK": "Добавить задачу",
+  "ALL": "Все",
+  "ACTIVE": "Активные",
+  "COMPLETED": "Выполненные",
+  "DELETE_COMPLETED": "Удалить выполненные задачи",
+  "REMAINING_TASKS": "Осталось {{count}} задач"
+}

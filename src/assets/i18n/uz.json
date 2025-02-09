@@ -1,0 +1,10 @@
+{
+  "TASK_MANAGER": "Vazifalar boshqaruvchisi",
+  "NEW_TASK_PLACEHOLDER": "Yangi vazifa",
+  "ADD_TASK": "Vazifani qo'shish",
+  "ALL": "Hammasi",
+  "ACTIVE": "Faollar",
+  "COMPLETED": "Bajarilganlar",
+  "DELETE_COMPLETED": "Bajarilgan vazifalarni o'chirish",
+  "REMAINING_TASKS": "Qolgan vazifalar: {{count}}"
+}

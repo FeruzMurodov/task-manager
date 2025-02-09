@@ -27,6 +27,7 @@ export class TasksComponent implements OnInit {
   newTaskTitle: string = ''
   filter: string = 'all'
 
+
   constructor(private translate: TranslateService) {
     this.translate.setDefaultLang('en');
     const savedLang = localStorage.getItem('lang');
@@ -65,7 +66,7 @@ export class TasksComponent implements OnInit {
     if (!this.newTaskTitle.trim()) return;
 
     const newTask: Task = {
-      id: this.tasks.length + 1,
+      id: Date.now(),
       title: this.newTaskTitle,
       completed: false,
       editing: false,
@@ -87,15 +88,17 @@ export class TasksComponent implements OnInit {
   }
 
   toggleTask(taskId: number) {
-    this.tasks = this.tasks.map(task =>
-      task.id === taskId ? {
-        ...task,
-        completed: !task.completed,
-        animationState: task.completed ? 'active' : 'completed'
-      } : task
-    );
+    this.tasks = this.tasks.map(task => {
+      if (task.id === taskId) {
+        const updatedTask = {...task, completed: !task.completed};
+        return updatedTask;
+      }
+      return {...task};
+    });
+
     this.saveTasks();
   }
+
 
   get filteredTasks() {
     if (this.filter === 'completed') {
@@ -139,6 +142,9 @@ export class TasksComponent implements OnInit {
     localStorage.setItem('lang', lang);
   }
 
+  trackById(index: number, task: Task) {
+    return task.id;
+  }
 }
 
 

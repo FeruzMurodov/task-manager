@@ -1,41 +1,51 @@
-<h1>{{ 'TASK_MANAGER' | translate }}</h1>
-<div class="language-switcher">
-  <button (click)="setLanguage('en')">EN</button>
-  <button (click)="setLanguage('ru')">RU</button>
-  <button (click)="setLanguage('uz')">UZ</button>
-</div>
-<input #taskInput type="text" [(ngModel)]="newTaskTitle" [placeholder]="'NEW_TASK_PLACEHOLDER' | translate">
-<button (click)="addTask()">{{ 'ADD_TASK' | translate }}</button>
-<div>
-  <button (click)="setFilter('all')" [ngClass]="{'active-filter': filter === 'all'}">{{ 'ALL' | translate }}</button>
-  <button (click)="setFilter('active')" [ngClass]="{'active-filter': filter === 'active'}">{{ 'ACTIVE' | translate }}
-  </button>
-  <button (click)="setFilter('completed')"
-          [ngClass]="{'active-filter': filter === 'completed'}">{{ 'COMPLETED' | translate }}
-  </button>
-</div>
-<p>{{ 'REMAINING_TASKS' | translate:{count: remainingTasksCount()} }}</p>
-<ul>
-  <li
-    *ngFor="let task of filteredTasks"
-    class="task-item"
-    [@taskAnimation]="task.completed ? 'completed' : 'active'"
-    [ngClass]="{'completed':task.completed}"
-  >
-    <input type="checkbox" [checked]="task.completed" (change)="toggleTask(task.id)">
-
-    <span *ngIf="!task.editing" (dblclick)="editTask(task)">{{ task.title }}</span>
-    <input
-      *ngIf="task.editing"
-      type="text"
-      [(ngModel)]="task.title"
-      (blur)="saveTask(task)"
-      (keyup.enter)="saveTask(task)"
+<body>
+  <div class="container">
+    <div class="language-switcher">
+      <button (click)="setLanguage('en')">EN</button>
+      <button (click)="setLanguage('ru')">RU</button>
+      <button (click)="setLanguage('uz')">UZ</button>
+    </div>
+    <h1>{{ 'TASK_MANAGER' | translate }}</h1>
+    <input #taskInput
+           type="text"
+           [(ngModel)]="newTaskTitle" [placeholder]="'NEW_TASK_PLACEHOLDER' | translate"
     >
-    <span class="timestamp">{{ task.createdAt }}</span>
-    <button (click)="deleteTask(task.id)">❌</button>
-  </li>
-  <button (click)="clearCompletedTasks()">
-    {{ 'DELETE_COMPLETED' | translate }}
-  </button>
-</ul>
+    <button (click)="addTask()">{{ 'ADD_TASK' | translate }}</button>
+    <div class="filters">
+      <button (click)="setFilter('all')"
+              [ngClass]="{'active-filter': filter === 'all'}">{{ 'ALL' | translate }}
+      </button>
+      <button (click)="setFilter('active')"
+              [ngClass]="{'active-filter': filter === 'active'}">{{ 'ACTIVE' | translate }}
+      </button>
+      <button (click)="setFilter('completed')"
+              [ngClass]="{'active-filter': filter === 'completed'}">{{ 'COMPLETED' | translate }}
+      </button>
+    </div>
+    <p>{{ 'REMAINING_TASKS' | translate:{count: remainingTasksCount()} }}</p>
+    <ul>
+      <li
+        *ngFor="let task of filteredTasks; trackBy: trackById"
+        class="task-item"
+        [@taskAnimation]="task.completed ? 'completed' : 'active'"
+        [ngClass]="{'completed':task.completed}"
+      >
+        <input type="checkbox" [checked]="task.completed" (change)="toggleTask(task.id)">
+
+        <span *ngIf="!task.editing" (dblclick)="editTask(task)">{{ task.title }}</span>
+        <input
+          *ngIf="task.editing"
+          type="text"
+          [(ngModel)]="task.title"
+          (blur)="saveTask(task)"
+          (keyup.enter)="saveTask(task)"
+        >
+        <span class="timestamp">{{ task.createdAt }}</span>
+        <button (click)="deleteTask(task.id)">❌</button>
+      </li>
+      <button class="btn-delete" (click)="clearCompletedTasks()">
+        {{ 'DELETE_COMPLETED' | translate }}
+      </button>
+    </ul>
+  </div>
+</body>

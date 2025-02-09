@@ -30,9 +30,17 @@
         [@taskAnimation]="task.completed ? 'completed' : 'active'"
         [ngClass]="{'completed':task.completed}"
       >
-        <input type="checkbox" [checked]="task.completed" (change)="toggleTask(task.id)">
-
-        <span *ngIf="!task.editing" (dblclick)="editTask(task)">{{ task.title }}</span>
+        <input
+          type="checkbox"
+          [checked]="task.completed"
+          (change)="toggleTask(task.id)"
+        >
+        <span
+          class="task-content"
+          *ngIf="!task.editing"
+          (dblclick)="editTask(task)"
+        >{{ task.title }}
+        </span>
         <input
           *ngIf="task.editing"
           type="text"

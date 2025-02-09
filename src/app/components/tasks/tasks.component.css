@@ -88,6 +88,7 @@ input[type="checkbox"] {
   font-size: 14px;
   color: gray;
 
+
 }
 
 .task-item {
@@ -97,6 +98,12 @@ input[type="checkbox"] {
   padding: 10px;
   border-bottom: 1px solid #ddd;
   transition: background-color 0.3s, ease-in-out;
+}
+
+.task-content {
+  text-align: left;
+  flex-grow: 1;
+  padding-left: 10px;
 }
 
 .task-item.completed {

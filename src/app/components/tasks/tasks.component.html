@@ -1,10 +1,8 @@
-<div class="main title">
-  <h1>{{ 'TASK_MANAGER' | translate }}</h1>
-  <div class="language-switcher">
-    <button (click)="setLanguage('en')">EN</button>
-    <button (click)="setLanguage('ru')">RU</button>
-    <button (click)="setLanguage('uz')">UZ</button>
-  </div>
+<h1>{{ 'TASK_MANAGER' | translate }}</h1>
+<div class="language-switcher">
+  <button (click)="setLanguage('en')">EN</button>
+  <button (click)="setLanguage('ru')">RU</button>
+  <button (click)="setLanguage('uz')">UZ</button>
 </div>
 <input #taskInput type="text" [(ngModel)]="newTaskTitle" [placeholder]="'NEW_TASK_PLACEHOLDER' | translate">
 <button (click)="addTask()">{{ 'ADD_TASK' | translate }}</button>
